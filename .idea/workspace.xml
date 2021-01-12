@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8b3bd1da-acb1-48c0-b7a9-a0384f797506" name="Default Changelist" comment="初始化Spark SQL和kafka以及一些零碎的Java知识。" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1eiY8jfiX1CJp5D6q383MSozCel" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/一些值得探究的框架和思想" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/大数据框架/spark" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/一些值得探究的框架和思想" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Java语言知识" />
+      <recent name="$PROJECT_DIR$/大数据框架" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8b3bd1da-acb1-48c0-b7a9-a0384f797506" name="Default Changelist" comment="" />
+      <created>1594805722595</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594805722595</updated>
+    </task>
+    <task id="LOCAL-00001" summary="初始化Spark SQL和kafka以及一些零碎的Java知识。">
+      <created>1594956188233</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1594956188233</updated>
+    </task>
+    <task id="LOCAL-00002" summary="初始化Spark SQL和kafka以及一些零碎的Java知识。">
+      <created>1610474826845</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610474826846</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="初始化Spark SQL和kafka以及一些零碎的Java知识。" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始化Spark SQL和kafka以及一些零碎的Java知识。" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602728428676">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1602728428676" />
+    <state x="441" y="259" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602727641263">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="441" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1602727641263" />
+    <state x="229" y="89" key="SettingsEditor" timestamp="1610475221668">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1610475221668" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1610474832484">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1610474832484" />
+    <state x="525" y="346" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1610475699981">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="525" y="346" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1440.900@0.0.1440.900" timestamp="1610475699981" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1602738457813">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1602738457813" />
+  </component>
+</project>
