@@ -19,41 +19,41 @@
 字眼：**FlinkYarnSessionCli**，它的核心方法就是run方法（这里只展示其主要流程，细节会在 下文展开说明）：   
 ```text
 public int run(String[] args) throws CliArgsException, FlinkException {
-    //1.将配置和传入参数合并成新的全量Configuration;
+    1.将配置和传入参数合并成新的全量Configuration;
     effectiveConfiguration.addAll(commandLineConfiguration);
-    //2.基于spi机制加载YarnClusterClientFactory，这是一个封装了对yarn cluster操作的工厂类;
+    2.基于spi机制加载YarnClusterClientFactory，这是一个封装了对yarn cluster操作的工厂类;
     final ClusterClientFactory<ApplicationId> yarnClusterClientFactory =
                     clusterClientServiceLoader.getClusterClientFactory(effectiveConfiguration);
-    //3.创建YarnClusterDescriptor，其构造方法内有一个yarnclient对象
+    3.创建YarnClusterDescriptor，其构造方法内有一个yarnclient对象
     final YarnClusterDescriptor yarnClusterDescriptor = 
                     (YarnClusterDescriptor)
                             yarnClusterClientFactory.createClusterDescriptor(effectiveConfiguration);
-    //Flink on yarn集群在创建(执行yarn-session.sh)后会产生一个applicationId，如果启动参数中夹带了这个值，说明已存在一个flink on yarn集群，不需要再启动；
+    4.Flink on yarn集群在创建(执行yarn-session.sh)后会产生一个applicationId，如果启动参数中夹带了这个值，说明已存在一个flink on yarn集群，不需要再启动；
     if (cmd.hasOption(applicationId.getOpt())) {
-        //4-1.这里发生了yarn的一次rpc调用，返回的applicationreport中包括了jobmanager的host和port等信息，基于此封装了一个RestClusterClient作为返回；
+        4-1.这里发生了yarn的一次rpc调用，返回的applicationreport中包括了jobmanager的host和port等信息，基于此封装了一个RestClusterClient作为返回；
         clusterClientProvider = yarnClusterDescriptor.retrieve(yarnApplicationId);
     } else {
-        //4-2.根据configuration构造clusterSpecification，包括jobmanager的内存、taskmanager的内存和每个taskmanager的taskslot大小；
+        4-2.根据configuration构造clusterSpecification，包括jobmanager的内存、taskmanager的内存和每个taskmanager的taskslot大小；
         final ClusterSpecification clusterSpecification =
                                     yarnClusterClientFactory.getClusterSpecification(
                                             effectiveConfiguration);
-        //5.启动一个yarn-session模式的Flink集群，下文重点讲述；
+        5.启动一个yarn-session模式的Flink集群，下文重点讲述；
         clusterClientProvider =
                             yarnClusterDescriptor.deploySessionCluster(clusterSpecification);
-        //略
+        略
         ClusterClient<ApplicationId> clusterClient = clusterClientProvider.getClusterClient();
         yarnApplicationId = clusterClient.getClusterId();
-        //6.确认启动成功后，将重要信息封装成properties文件，并持久化至本地磁盘
+        6.确认启动成功后，将重要信息封装成properties文件，并持久化至本地磁盘，最重要的信息为applicationId，将在之后的Flink Job提交时用于查找Cluster信息；
         writeYarnPropertiesFile(yarnApplicationId, dynamicPropertiesEncoded);
     }
     if (detached模式) {
     } else {
-        //7.创建一个yarn-session集群的monitor，这里加了一个hook，在集群退出时能够有所感知，做一些资源清理的工作；
+        7.创建一个yarn-session集群的monitor，这里加了一个hook，在集群退出时能够有所感知，做一些资源清理的工作；
         final YarnApplicationStatusMonitor yarnApplicationStatusMonitor = ......
     }
-    //8.运行交互式客户端，循环获取集群状态，并做相应处理；
+    8.运行交互式客户端，循环获取集群状态，并做相应处理；
     runInteractiveCli(yarnApplicationStatusMonitor, acceptInteractiveInput);   
-    //收尾工作，略。
+    收尾工作，略。
 }
 ```
 **以上是从client端视角对yarn-session模式的Flink集群启动的观察，对于细节我们再对上面8个步骤中的重点部分做进一步的分析，这里会涉及到Yarn的源码的学习。**     
@@ -90,24 +90,24 @@ public ClusterClientProvider<ApplicationId> retrieve(ApplicationId applicationId
 }    
 ```
 #### 步骤5
-核心方法实现：
+核心方法实现： 
 ```text
 deployInternal(ClusterSpecification clusterSpecification, String applicationName, String yarnClusterEntrypoint,
     @Nullable JobGraph jobGraph, boolean detached) throws Exception {
-        //<font color=#FF0000>这里会通过yarnclient rpc去查到numYarnMaxVcores，然后根据配置判断yarn集群目前cpu核数资源是否足够，同时也有hadoop和yarn配置文件的校验；</font>
+        1.这里会通过yarnclient rpc去查到numYarnMaxVcores，然后根据配置判断yarn集群目前cpu核数资源是否足够，同时也有hadoop和yarn配置文件的校验；
         isReadyForDeployment(ClusterSpecification clusterSpecification);
-        //确认指定的queue是否ok；
+        2.确认指定的queue是否ok；
         checkYarnQueues(yarnClient);
-        //通过yarnclient创建application,这里会走到rmClient.getNewApplication方法中， 具体其实得看server端的逻辑，这个实现在RMClientService中，
-        //主要就是两件事：获取ApplicationId跟查询资源的上下限；
+        3.通过yarnclient创建application,这里会走到rmClient.getNewApplication方法中， 具体其实得看server端的逻辑，
+        这个实现在RMClientService中，主要就是两件事：获取ApplicationId跟查询资源的上下限；
         final YarnClientApplication yarnApplication = yarnClient.createApplication();
         final GetNewApplicationResponse appResponse = yarnApplication.getNewApplicationResponse();
         Resource maxRes = appResponse.getMaximumResourceCapability();
-        //yarnclient去获取yarn上各个节点的容量内存和使用内存，计算出可用内存；
+        4.通过yarnclient去获取yarn上各个节点的容量内存和使用内存，计算出可用内存；
         freeClusterMem = getCurrentFreeClusterResources(yarnClient);
-        //基于获取到的yarn集群资源信息和之前定义的clusterSpecification进行比对，确认是否满足资源条件，并调整clusterSpecification相应参数。
+        5.基于获取到的yarn集群资源信息和之前定义的clusterSpecification进行比对，确认是否满足资源条件，并调整clusterSpecification相应参数。
         validClusterSpecification = validateClusterResources(clusterSpecification, yarnMinAllocationMB, maxRes, freeClusterMem);
-        /**
+        6.启动ApplicationMaster：下文详细介绍；
         ApplicationReport report = startAppMaster(
                                 flinkConfiguration,
                                 applicationName,
@@ -116,8 +116,110 @@ deployInternal(ClusterSpecification clusterSpecification, String applicationName
                                 yarnClient,
                                 yarnApplication,
                                 validClusterSpecification);
-        
+        7.基于report更新flinkconfiguration；
+        setClusterEntrypointInfoToConfig(report);
+        8.返回restclusterclient
+        return new RestClusterClient<>(flinkConfiguration, report.getApplicationId());
     }
         
 ```
+启动ApplicationMaster进程可以说是启动yarn-session模式的核心，在Flink-yarn模块中代码量巨大，整体可以归结为以下三个步骤：
+>*
+>*
+>*
 
+```text
+private ApplicationReport startAppMaster(
+      Configuration configuration,
+      String applicationName,
+      String yarnClusterEntrypoint,
+      JobGraph jobGraph,
+      YarnClient yarnClient,
+      YarnClientApplication yarnApplication,
+      ClusterSpecification clusterSpecification) throws Exception {
+   //初始化文件系统
+   //根据配置获取homeDir,其路径为/user/${currentUser}，一般在hdfs上，表示jar、log配置上传的路径；
+   final FileSystem fs = FileSystem.get(yarnConfiguration);
+   final Path homeDir = fs.getHomeDirectory();
+   ApplicationSubmissionContext appContext = yarnApplication.getApplicationSubmissionContext();
+   //YarnClusterDescriptor的构造函数中有addShipFiles方法，也是依据flinkConfiguration来找寻的，
+   //systemShipFiles表示会被上传到hdfs的文件 并且被添加到classpath中；
+   for (File file : shipFiles) {
+      systemShipFiles.add(file.getAbsoluteFile());
+   }
+   final String logConfigFilePath = configuration.getString(YarnConfigOptionsInternal.APPLICATION_LOG_CONFIG_FILE);
+   if (logConfigFilePath != null) {
+      systemShipFiles.add(new File(logConfigFilePath));
+   }
+   //将flink_home/lib下的文件添加到systemShipFiles、通过-yt指定的文件也在里面；
+   addLibFoldersToShipFiles(systemShipFiles);
+   //将flink_home/plugins 下的文件添加到shipOnlyFiles，shipOnlyFiles也会被上传到hdfs，但不会被添加到classpath；
+   addPluginsFoldersToShipFiles(shipOnlyFiles);
+
+   final ApplicationId appId = appContext.getApplicationId();
+
+   // zk-ha相关处理和重试策略逻辑
+   ......
+  //用户jar，jobGraph为空的话表示这不是per-job模式，否则从jobGraph中将userJars set进去，JobGraph的构建后续介绍；
+   final Set<File> userJarFiles = (jobGraph == null)
+         ? Collections.emptySet()
+         : jobGraph.getUserJars().stream().map(f -> f.toUri()).map(File::new).collect(Collectors.toSet());
+
+   //需要缓存的本地文件上传到hdfs，一般使用在文件共享中
+   if (jobGraph != null) {
+      for (Map.Entry<String, DistributedCache.DistributedCacheEntry> entry : jobGraph.getUserArtifacts().entrySet()) {
+         org.apache.flink.core.fs.Path path = new org.apache.flink.core.fs.Path(entry.getValue().filePath);
+         //只上传本地文件
+         if (!path.getFileSystem().isDistributedFS()) {
+            Path localPath = new Path(path.getPath());
+            Tuple2<Path, Long> remoteFileInfo =
+               Utils.uploadLocalFileToRemote(fs, appId.toString(), localPath, homeDir, entry.getKey());
+            jobGraph.setUserArtifactRemotePath(entry.getKey(), remoteFileInfo.f0.toString());
+         }
+      }
+      jobGraph.writeUserArtifactEntriesToConfiguration();
+   }
+   //表示启动appMaster需要的资源文件，会从hdfs上下载
+   final Map<String, LocalResource> localResources = new HashMap<>(2 + systemShipFiles.size() + userJarFiles.size());
+   // 访问hdfs的安全设置
+   final List<Path> paths = new ArrayList<>(2 + systemShipFiles.size() + userJarFiles.size());
+   // 启动taskManager需要的资源文件
+   StringBuilder envShipFileList = new StringBuilder();
+
+   //将systemShipFiles、shipOnlyFiles、用户jar上传到hdfs
+   ......
+   //classpath 排序相关
+   ......
+   // classPathBuilder: 存放classpath的信息
+   StringBuilder classPathBuilder = new StringBuilder();
+   //构建classpath: shipFile-jar、user-jar、log4j、yaml配置文件
+    ......
+   //指定jobmanager的内存设置，堆内外和metaspace等；
+   final JobManagerProcessSpec processSpec =
+                JobManagerProcessUtils.processSpecFromConfigWithNewOptionToInterpretLegacyHeap(
+                        flinkConfiguration, JobManagerOptions.TOTAL_PROCESS_MEMORY);
+  //初始化ContainerLaunchContext，设置启动命令，最重要的就是启动哪个类，这里就是yarnClusterEntrypoint；
+   final ContainerLaunchContext amContainer = setupApplicationMasterContainer(
+         yarnClusterEntrypoint,
+         hasLogback,
+         hasLog4j,
+         hasKrb5,
+         clusterSpecification.getMasterMemoryMB());
+   amContainer.setLocalResources(localResources);
+   //配置环境变量参数到appMasterEnv中，在启动启动YarnJobClusterEntrypoint时用到，例如：classpath、hadoopUser、appId等;
+   amContainer.setEnvironment(appMasterEnv);
+   // 略：设置提交任务队列、yarn任务名称的配置信息
+   //设置如果deployment失败的hook；
+   Thread deploymentFailureHook = new DeploymentFailureHook(yarnApplication, yarnFilesDir);
+   Runtime.getRuntime().addShutdownHook(deploymentFailureHook);
+   //构建ApplicationSubmissionContext，下文的appContext，里面包括了上面的amContainer信息等；
+   ......
+   //通过yarnclient提交创建AM的请求，最终是会走到yarn server端，也就是在RMClientService中的submitApplication中，这里有个核心方法rmAppManager.submitApplication，
+   //通过事件调度器对新建Application进行处理，也就是对application的信息保存，这里涉及到yarn中的状态机和事件模型，最终执行的是yarnClusterEntrypoint中的main方法；
+   yarnClient.submitApplication(appContext);
+   //略，不断获取启动AM的状态。
+}
+```   
+在调用了startAppMaster方法之后，一个叫YarnApplicationMasterRunner的进程就被创建起来了，其运行在yarn的某个工作节点上，需要注意的是，这个进程
+不能算是一个严格意义上的ApplicationMaster，它内部包含了两个组件：ApplicationMaster和JobManager。在启动AM的同时也会启动JobManager，因为JobManager
+和AM在同一个进程中，它会把JobManager的地址写到HDFS上，TaskManager启动的时候会去下载这个文件获取JobManager地址和它进行后续的通信。
