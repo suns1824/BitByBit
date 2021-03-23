@@ -124,9 +124,9 @@ deployInternal(ClusterSpecification clusterSpecification, String applicationName
         
 ```
 启动ApplicationMaster进程可以说是启动yarn-session模式的核心，在Flink-yarn模块中代码量巨大，整体可以归结为以下三个步骤：
->*
->*
->*
+>* 将用户jar、插件、shipFiles、配置文件、job.graph等文件上传到hdfs；
+>* 构建启动需要的classpath、ha-zk配置、安全配置、jobMaster启动命令等；
+>* 执行submitApplication方法。
 
 ```text
 private ApplicationReport startAppMaster(
@@ -223,3 +223,6 @@ private ApplicationReport startAppMaster(
 在调用了startAppMaster方法之后，一个叫YarnApplicationMasterRunner的进程就被创建起来了，其运行在yarn的某个工作节点上，需要注意的是，这个进程
 不能算是一个严格意义上的ApplicationMaster，它内部包含了两个组件：ApplicationMaster和JobManager。在启动AM的同时也会启动JobManager，因为JobManager
 和AM在同一个进程中，它会把JobManager的地址写到HDFS上，TaskManager启动的时候会去下载这个文件获取JobManager地址和它进行后续的通信。
+
+**以上是从client角度来理解一个yarn-serssion集群如何创建，接下来进入到YarnSessionClusterEntrypoint,理解AM是如何创建Flink集群的**
+
