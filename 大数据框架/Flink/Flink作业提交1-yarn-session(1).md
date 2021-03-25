@@ -222,10 +222,32 @@ private ApplicationReport startAppMaster(
 }
 ```   
 在调用了startAppMaster方法之后，一个叫YarnApplicationMasterRunner的进程就被创建起来了，其运行在yarn的某个工作节点上，需要注意的是，这个进程
-不能算是一个严格意义上的ApplicationMaster，它内部包含了两个组件：ApplicationMaster和JobManager。在启动AM的同时也会启动JobManager，因为JobManager
+不能算是一个严格意义上的ApplicationMaster，它内部包含了两个组件：ApplicationMaster和JobManager。上文解释了submitApplication中启动AM的逻辑，在分配到container并启动AM后同时也会启动JobManager，因为JobManager
 和AM在同一个进程中，它会把JobManager的地址写到HDFS上，TaskManager启动的时候会去下载这个文件获取JobManager地址和它进行后续的通信。
 
-**以上是从client角度来理解一个yarn-serssion集群如何创建，提到了AM的启动流程，接下来看看YarnSessionClusterEntrypoint中发生了什么。**
-
+**以上是从client角度来理解一个yarn-serssion集群如何创建，提到了AM的启动流程，接下来看看JobManager的初始化，看看YarnSessionClusterEntrypoint中发生了什么。**
+JobManager内包含了Dispatcher、ResourceManager、RPC服务等几个组件，所以启动JobManager的过程其实就是围绕着这几个组件进行的。这里就精简介绍一下主要步骤（将所有调用栈都写到一起）：
+```text
+    private void runCluster(Configuration configuration, PluginManager pluginManager) {
+        initializeServices(configuration, pluginManager) {
+             //基于jobmanager的host和port构建actorsystem，flink rpc基于akka构建(不完全)，spark则移除了akka，官方解释是不想维护akka的版本问题；
+             commonRpcService = AkkaRpcServiceUtils.createRemoteRpcService(config,host,port...);
+             //启动blobServer，blobServer是一个线程，监听端口随机
+             blobServer.start();
+             //启动心跳服务
+             heartbeatServices = createHeartbeatServices(configuration);
+             //创建监控指标服务
+             metricRegistry = createMetricRegistry(configuration);
+             //executiongraph的存储设置
+             createSerializableExecutionGraphStore;
+        }
+        // 基于上一步构造的对象和配置去创建和启动三个核心组件：webMonitorEndpoint，resourceManager，dispatcher；
+        dispatcherResourceManagerComponentFactory.create(config, ioExecutor, rpcService, blobServer, heartbearServices, ...) {
+            webMonitor：负责web服务，checkpoint以及异常恢复；
+            resourceManager：负责leader选举，slot注册管理，与taskExecutor监控，心跳管理，负责和yarn交互；
+            dispatcher：rest接口，接收到jobgraph后为作业创建一个jobmaster，将工作交给jobmaster（负责作业调度、管理作业和task的生命周期），构建executiongraph。
+        }
+    }
+```
 
 
