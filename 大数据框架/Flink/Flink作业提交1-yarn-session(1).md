@@ -215,7 +215,8 @@ private ApplicationReport startAppMaster(
    //构建ApplicationSubmissionContext，下文的appContext，里面包括了上面的amContainer信息等；
    ......
    //通过yarnclient提交创建AM的请求，最终是会走到yarn server端，也就是在RMClientService中的submitApplication中，这里有个核心方法rmAppManager.submitApplication，
-   //通过事件调度器对新建Application进行处理，也就是对application的信息保存，这里涉及到yarn中的状态机和事件模型，最终执行的是yarnClusterEntrypoint中的main方法；
+   //通过事件调度器对新建Application进行处理，创建containter，然后launch AM。如果不想深究，可以直接跳到ApplicationMasterLauncher类去查看handle方法，
+   //顺着往下走到AMLauncher类的launch方法，里面取出了上文设置的amContainer。这里涉及到yarn中的状态机和事件模型，最终执行的是yarnClusterEntrypoint中的main方法；
    yarnClient.submitApplication(appContext);
    //略，不断获取启动AM的状态。
 }
@@ -224,5 +225,7 @@ private ApplicationReport startAppMaster(
 不能算是一个严格意义上的ApplicationMaster，它内部包含了两个组件：ApplicationMaster和JobManager。在启动AM的同时也会启动JobManager，因为JobManager
 和AM在同一个进程中，它会把JobManager的地址写到HDFS上，TaskManager启动的时候会去下载这个文件获取JobManager地址和它进行后续的通信。
 
-**以上是从client角度来理解一个yarn-serssion集群如何创建，接下来进入到YarnSessionClusterEntrypoint,理解AM是如何创建Flink集群的**
+**以上是从client角度来理解一个yarn-serssion集群如何创建，提到了AM的启动流程，接下来看看YarnSessionClusterEntrypoint中发生了什么。**
+
+
 
