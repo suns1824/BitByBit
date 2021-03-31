@@ -142,10 +142,10 @@ public CompletableFuture<JobClient> execute(
 ```text
 execute() {
     StreamGraph sg = getStreamGraph(jobName) {
-        //略，自行阅读即可，StreamGraph由StreamNode和StreamEdge构成，StreamNode是StreamGraph中的节点，从Transformation转换而来，可以理解为一个算子。
-        //StreamEdge表示边，连接两个StreamNode，包含了旁路输出、分区器、字段筛选输出等信息。StreamGraph的构建思想其实和上面的Plan构建类似，从Sink向前
-        //追溯到SourceTransformation，针对某一类型的transformation，调用其transformXX方法，该方法会首先转换上游的Transformation进行递归转换，确保上游都已经完成
-        //了转换，然后通过addOperator构造StreamNode，调用addEdge与上游transform连接，构造出StreamNode。
+        略，自行阅读即可，StreamGraph由StreamNode和StreamEdge构成，StreamNode是StreamGraph中的节点，从Transformation转换而来，可以理解为一个算子。
+        StreamEdge表示边，连接两个StreamNode，包含了旁路输出、分区器、字段筛选输出等信息。StreamGraph的构建思想其实和上面的Plan构建类似，从Sink向前
+        追溯到SourceTransformation，针对某一类型的transformation，调用其transformXX方法，该方法会首先转换上游的Transformation进行递归转换，确保上游都已经完成
+        了转换，然后通过addOperator构造StreamNode，调用addEdge与上游transform连接，构造出StreamNode。流计算中不一样的地方还有OperationChain机制的存在。
         StreamGraph streamGraph = getStreamGraphGenerator().setJobName(jobName).generate();
     }
     StreamExecutionEnvironment.executeAsync(sg) {
@@ -155,8 +155,6 @@ execute() {
     }
 }
 ```
-本文的重点不是去解释JobGraph是如何构建和提交后发生了什么。关于这些，有空细细分析一波。  
-这篇文章写完后我觉得于我自己很有必要的是理一理Flink流批一体的实现。
 
 
 

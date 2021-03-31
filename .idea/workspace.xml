@@ -11,13 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b3bd1da-acb1-48c0-b7a9-a0384f797506" name="Default Changelist" comment="文档">
-      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/FlinkRPC.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink内存管理.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink资源管理.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/一些值得探究的框架和思想/Netty/io.md" beforeDir="false" afterPath="$PROJECT_DIR$/一些值得探究的框架和思想/Netty/io.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交1-yarn-session(1).md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink集群启动-yarn-session.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交2-yarn-session(2).md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交-1.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交3-yarn-session(3).md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交-1.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交-1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交2.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交2.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616873935157</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="文档">
+      <created>1617091405729</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1617091405729</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,10 +189,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1610475221668" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1616873936730">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1617091417668">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1616873936730" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1617091417668" />
     <state x="525" y="346" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1610475699981">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

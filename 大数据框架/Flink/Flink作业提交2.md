@@ -22,7 +22,7 @@ submitJob(jobGraph, timeout) {
                     jobGraphStateHandleStore.addAndLock(name, jobGraph) {
                         //jobgraph存到hdfs上
                         RetrievableStateHandle<T> storeHandle = storage.store(jobGraph);
-                        //序列化stateHandle，然后将其写到zk上，不是state本身，因为state可能会比较大，zk一般都是寸kb级别的对象。
+                        //序列化stateHandle，然后将其写到zk上，不是state本身，因为state可能会比较大，zk一般都是存kb级别的对象。
                         byte[] serializedStoreHandle = InstantiationUtil.serializeObject(storeHandle);
                         ...
                     }
@@ -35,7 +35,7 @@ submitJob(jobGraph, timeout) {
                 }
             }
             runJob(jobGraph, ExecutionType.SUBMISSION) {
-                //创建jobmaster，todo
+                //创建jobmaster
                 createJobManagerRunner(jobGraph, initializationTimestamp) {
                     
                 }
