@@ -1,4 +1,4 @@
-**上一篇介绍了Flink集群如何在Yarn上启动，本篇着重介绍用户编写的sql或者jar如何提交到Flink集群。**
+**[上一篇](Flink集群启动-yarn-session.md)介绍了Flink集群如何在Yarn上启动，本篇着重介绍用户编写的sql或者jar如何提交到Flink集群。**
 举个例子：一个提交作业的cli：
 ```text
 ./bin/flink run -yid <application_id> ./examples/batch/WordCount.jar
