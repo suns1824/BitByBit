@@ -11,9 +11,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b3bd1da-acb1-48c0-b7a9-a0384f797506" name="Default Changelist" comment="文档">
+      <change afterPath="$PROJECT_DIR$/JVM/jvm1.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaWeb/Redis" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaWeb/Spring.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaWeb/mybatis" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java语言知识/Java知识点必会.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Java语言知识/collection.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/K8S/K8S架构设计.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/K8S/K8S调度器设计.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UNIX编程/IO模型.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/WechatIMG629.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/network/http.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/network/websocket.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/network/大杂烩.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/一些值得探究的框架和思想/Actor与Akka/actor编程和akka.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业执行.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink应用容错.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink数据交换.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Hadoop/HDFS/rpc.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Hadoop/MapReduce/start.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Hadoop/Yarn/架构.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Hadoop/Yarn/状态机和事件模型.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据库/MySql.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据库/数据库.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交-1.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink作业提交2.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink作业调度.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink内存管理.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink内存管理.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/大数据框架/Flink/Flink状态管理.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink状态管理.md" afterDir="false" />
     </list>
@@ -45,12 +66,13 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/img" />
-      <recent name="$PROJECT_DIR$/一些值得探究的框架和思想" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Java语言知识" />
-      <recent name="$PROJECT_DIR$/大数据框架" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/JavaWeb" />
+      <recent name="$PROJECT_DIR$/JVM" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/一些值得探究的框架和思想/Actor与Akka" />
       <recent name="$PROJECT_DIR$/大数据框架/spark" />
     </key>
   </component>
@@ -163,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617183408279</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="文档">
+      <created>1617776960523</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1617776960524</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,18 +217,18 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1617261851491" />
-    <state x="390" y="259" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1616322483355">
+    <state x="390" y="259" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617788377341">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="390" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1616322483355" />
+    <state x="390" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1617788377341" />
     <state x="229" y="89" key="SettingsEditor" timestamp="1610475221668">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1610475221668" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1617183410057">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1617776962454">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1617183410057" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1617776962454" />
     <state x="525" y="346" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1610475699981">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
