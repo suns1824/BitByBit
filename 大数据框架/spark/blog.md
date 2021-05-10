@@ -1,0 +1,5 @@
+[yarn-client和yarn-cluster](https://www.cnblogs.com/ITtangtang/p/7967386.html)    
+[spark内存](https://blog.csdn.net/pre_tender/article/details/101517789)  
+[spark容错](https://www.cnblogs.com/duanxz/p/6329675.html)    
+[spark数据倾斜](https://developer.aliyun.com/article/741111)  
+[cache|persist|checkpoint](https://blog.csdn.net/ljp812184246/article/details/53897613)  

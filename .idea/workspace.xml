@@ -11,7 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b3bd1da-acb1-48c0-b7a9-a0384f797506" name="Default Changelist" comment="文档">
+      <change afterPath="$PROJECT_DIR$/JVM/jvm2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/Flink文档.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/Flink/维表join.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/spark/blog.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/大数据SQL引擎/hive.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/大数据框架/大数据SQL引擎/presto.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network/大杂烩.md" beforeDir="false" afterPath="$PROJECT_DIR$/network/大杂烩.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plan/10150203.md" beforeDir="false" afterPath="$PROJECT_DIR$/plan/10150203.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/大数据框架/Hadoop/MapReduce/start.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Hadoop/MapReduce/start.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/大数据框架/Hadoop/Yarn/架构.md" beforeDir="false" afterPath="$PROJECT_DIR$/大数据框架/Hadoop/Yarn/架构.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617931358614</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="文档">
+      <created>1618023637817</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1618023637817</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,10 +224,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1610475221668" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1617931361626">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1618023640775">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1617931361626" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1618023640775" />
+    <state x="421" y="205" width="598" height="490" key="find.popup" timestamp="1618569732042">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="421" y="205" width="598" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1618569732042" />
     <state x="525" y="346" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1610475699981">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

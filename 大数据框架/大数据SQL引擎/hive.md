@@ -1,0 +1,1 @@
+[hive和mysql](https://blog.csdn.net/qq_39597203/article/details/89481867)
